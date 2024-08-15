@@ -85,6 +85,10 @@
           labels: {
 			boxWidth: 15,
           },
+        },
+		title: {
+        display: true,
+        text: 'Active Incentives in Honey.',
         }
       }
 	}
@@ -105,6 +109,10 @@
           labels: {
 			boxWidth: 15,
           },
+        },
+		title: {
+        display: true,
+        text: 'Active BGT emmissions.',
         }
       }
     }
@@ -122,6 +130,10 @@
 			boxWidth: 15,
           },
 		  position: 'left',
+        },
+		title: {
+        display: true,
+        text: 'Active Incentives in Honey.',
         }
       }
     }
@@ -138,6 +150,10 @@
 			boxWidth: 15,
           },
 		  position: 'left',
+        },
+		title: {
+        display: true,
+        text: 'Active BGT emmissions.',
         }
       }
     }
@@ -164,6 +180,10 @@
 			boxWidth: 15,
           },
 		  position: 'left',
+        },
+		title: {
+        display: true,
+        text: 'Incentive/Emmissions ratio. (Higher is better)',
         }
       }
     }
