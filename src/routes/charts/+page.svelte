@@ -8,6 +8,16 @@
 	let Incentive_Donut
 	let Ratio_Donut
 
+	function generateColors(numColors) {
+      const colors = [];
+      for (let i = 0; i < numColors; i++) {
+        const hue = (i * 360 / numColors) % 360;
+        colors.push(`hsl(${hue}, 70%, 60%)`); // Adjust saturation and lightness as needed
+      }
+      return colors;
+    }
+
+  
 	async function fetchData() {
 	  const response = await fetch('https://bartio-pol-indexer.berachain-devnet.com/berachain/v1alpha1/beacon/vaults');
 	  const data = await response.json();
@@ -24,6 +34,11 @@
   chartData.sort((a, b) => b.activeIncentives - a.activeIncentives);
   console.log(chartData);
 
+  const numVaults = chartData.length;
+  const backgroundColors = generateColors(numVaults);
+  const borderColors = backgroundColors.map(color => color.replace('70%', '100%'));
+
+
   const i_ctx = document.getElementById('Incentive_Chart').getContext('2d');
   const e_ctx = document.getElementById('Emmission_Chart').getContext('2d');
   const incentiveDonutCtx = document.getElementById('Incentive_Donut').getContext('2d');
@@ -33,10 +48,9 @@
   const Incentive_data = {
     labels: chartData.map(vault => vault.name),
     datasets: [{
-      label: 'Active Incentives in Honey',
       data: chartData.map(vault => vault.activeIncentives),
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
+      backgroundColor: backgroundColors,
+      borderColor: borderColors,
       borderWidth: 2,
 	  pointStyle: 'line'
 	  
@@ -48,8 +62,8 @@
     datasets: [{
       label: 'BGT emissions',
       data: chartData.map(vault => vault.bgtInflationCapture),
-      backgroundColor: 'rgba(75, 192, 192, 0.1)',
-      borderColor: 'rgba(75, 192, 192, 1)',
+      backgroundColor: backgroundColors,
+      borderColor: borderColors,
       borderWidth: 2
     }]
   };
@@ -137,8 +151,8 @@
       datasets: [{
         label: 'Incentive/Emission Ratio',
         data: ratioData,
-        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-        borderColor: 'rgba(153, 102, 255, 1)',
+        backgroundColor: backgroundColors,
+        borderColor: borderColors,
         borderWidth: 2
       }]
     },
