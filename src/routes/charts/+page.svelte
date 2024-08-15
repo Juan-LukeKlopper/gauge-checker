@@ -89,7 +89,12 @@
             size: 20,
 		  },
         }
-      	  }
+      },
+	  interaction: {
+		axis: 'x',
+		mode: 'nearest',
+		intersect: false,
+	  }
 	}
     });
 
@@ -114,6 +119,11 @@
             size: 20,
 		  },
         }
+	  },
+	    interaction: {
+		  axis: 'x',
+		  mode: 'nearest',
+		  intersect: false,
 		}
       }
   });
