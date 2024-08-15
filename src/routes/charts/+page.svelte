@@ -7,7 +7,7 @@
 	let Emission_Donut
 	let Incentive_Donut
 	let Ratio_Donut
-  
+
 	async function fetchData() {
 	  const response = await fetch('https://bartio-pol-indexer.berachain-devnet.com/berachain/v1alpha1/beacon/vaults');
 	  const data = await response.json();
@@ -18,9 +18,10 @@
 		bgtInflationCapture: vault.bgtInflationCapture
 	  }));
 	}
-	
+
 	onMount(async () => {
   const chartData = await fetchData();
+  chartData.sort((a, b) => b.activeIncentives - a.activeIncentives);
   console.log(chartData);
 
   const i_ctx = document.getElementById('Incentive_Chart').getContext('2d');
@@ -157,11 +158,11 @@
 
   </script>
   
-  <canvas id="Incentive_Chart" class="chart"></canvas>
-  <canvas id="Emmission_Chart" class="chart"></canvas>
+	<canvas id="Incentive_Chart" class="chart"></canvas>
+	<canvas id="Emmission_Chart" class="chart"></canvas>
   <canvas id="Incentive_Donut" class="chart"></canvas>
-  <canvas id="Emission_Donut" class="chart"></canvas>
-  <canvas id="Ratio_Donut" class="chart"></canvas>
+	<canvas id="Emission_Donut" class="chart"></canvas>
+	<canvas id="Ratio_Donut" class="chart"></canvas>
 
   
   
