@@ -52,8 +52,6 @@
       backgroundColor: backgroundColors,
       borderColor: borderColors,
       borderWidth: 2,
-	  pointStyle: 'line'
-	  
     }]
   };
 
@@ -87,10 +85,10 @@
           },
         },
 		title: {
-        display: true,
-        text: 'Active Incentives in Honey.',
+          display: true,
+          text: 'Active Incentives in Honey.',
         }
-      }
+	  }
 	}
     });
 
@@ -111,11 +109,11 @@
           },
         },
 		title: {
-        display: true,
-        text: 'Active BGT emmissions.',
+          display: true,
+          text: 'Active BGT emmissions.',
         }
+		}
       }
-    }
   });
 
   // Create donut charts
@@ -132,8 +130,8 @@
 		  position: 'left',
         },
 		title: {
-        display: true,
-        text: 'Active Incentives in Honey.',
+          display: true,
+          text: 'Active Incentives in Honey.',
         }
       }
     }
@@ -152,8 +150,8 @@
 		  position: 'left',
         },
 		title: {
-        display: true,
-        text: 'Active BGT emmissions.',
+          display: true,
+          text: 'Active BGT emmissions.',
         }
       }
     }
@@ -182,7 +180,7 @@
 		  position: 'left',
         },
 		title: {
-        display: true,
+          display: true,
         text: 'Incentive/Emmissions ratio. (Higher is better)',
         }
       }
