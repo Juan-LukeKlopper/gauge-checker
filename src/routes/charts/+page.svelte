@@ -218,18 +218,40 @@
 
   </script>
   
+  <div class="chart-container">
 	<canvas id="Incentive_Chart" class="chart"></canvas>
+	<canvas id="Incentive_Donut" class="chart"></canvas>
+  </div>
+  
+  <div class="chart-container">
 	<canvas id="Emmission_Chart" class="chart"></canvas>
-  <canvas id="Incentive_Donut" class="chart"></canvas>
 	<canvas id="Emission_Donut" class="chart"></canvas>
+  </div>
+  
+  <div class="chart-container">
 	<canvas id="Ratio_Donut" class="chart"></canvas>
+  </div>
 
   
   
   <style>
+	.chart-container {
+	  display: flex;
+	  justify-content: space-between;
+	  flex-wrap: wrap;
+	  margin-bottom: 20px;
+	}
+
 	.chart {
-	  max-width: 1200px;
-	  margin: auto;
+	  flex: 1 1 45%; /* Each chart takes up 45% of the container's width */
+	  max-width: 700px; /* Maximum width for each chart */
+	  margin: 10px;
+	}
+
+	@media (max-width: 1200px) {
+	.chart {
+	  flex: 1 1 100%; /* On smaller screens, each chart takes up full width */
+	}
 	}
   </style>
   
