@@ -133,7 +133,7 @@
   });
 
   // Create donut charts
-  new Chart(incentiveDonutCtx, {
+  Incentive_Donut = new Chart(incentiveDonutCtx, {
     type: 'doughnut',
     data: Incentive_data,
     options: {
@@ -157,7 +157,7 @@
     }
   });
 
-  new Chart(emissionDonutCtx, {
+  Emission_Donut = new Chart(emissionDonutCtx, {
     type: 'doughnut',
     data: emmissions_data,
     options: {
@@ -219,7 +219,12 @@
               size: 14,
             }
           },
-        }
+        },
+		interaction: {
+		  axis: 'x',
+		  mode: 'nearest',
+		  intersect: false,
+		}
       }
   });
 
@@ -230,6 +235,14 @@
 
     button.textContent = `Switch chart to ${scaleType === 'linear' ? 'Logarithmic' : 'Linear'} Scale`;
   }
+
+  function toggleChartType(chart, button) {
+      const chartType = chart.options.cutout === '50%' ? '0' : '50%';
+      chart.options.cutout = chartType;
+      chart.update();
+
+      button.textContent = `Switch chart to ${chartType === '50%' ? 'Pie' : 'Doughnut'} Chart`;
+    }
 
   // Event Listeners for Buttons
   document.getElementById('toggleIncentiveScale').addEventListener('click', () => {
@@ -243,71 +256,86 @@
   document.getElementById('toggleRatioScale').addEventListener('click', () => {
     toggleScale(Ratio_chart, document.getElementById('toggleRatioScale'));
   });
+
+  document.getElementById('toggleIncentiveType').addEventListener('click', () => {
+      toggleChartType(Incentive_Donut, document.getElementById('toggleIncentiveType'));
+    });
+
+    document.getElementById('toggleEmmissionType').addEventListener('click', () => {
+      toggleChartType(Emission_Donut, document.getElementById('toggleEmmissionType'));
+    });
 });
 
   </script>
   
   <div class="chart-container">
-	<div>
-  	  <button id="toggleIncentiveScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+	<div class="chart-wrapper">
+		<button id="toggleIncentiveScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+		<canvas id="Incentive_Chart" class="chart"></canvas>
 	</div>
-	<canvas id="Incentive_Chart" class="chart"></canvas>
-	<canvas id="Incentive_Donut" class="chart"></canvas>
-  </div>
-
-  <div class="chart-container">
-	<div>
-	  <button id="toggleEmmissionScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+	<div class="chart-wrapper">
+		<button id="toggleIncentiveType" class="toggle-button">Switch chart to Pie Chart</button>
+		<canvas id="Incentive_Donut" class="chart"></canvas>
 	</div>
-	<canvas id="Emmission_Chart" class="chart"></canvas>
-	<canvas id="Emission_Donut" class="chart"></canvas>
-  </div>
+</div>
 
-  <div class="chart-container">
-	<div>
-	  <button id="toggleRatioScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+<div class="chart-container">
+	<div class="chart-wrapper">
+		<button id="toggleEmmissionScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+		<canvas id="Emmission_Chart" class="chart"></canvas>
 	</div>
-	<canvas id="Ratio_chart" class="chart"></canvas>
-  </div>
+	<div class="chart-wrapper">
+		<button id="toggleEmmissionType" class="toggle-button">Switch chart to Pie Chart</button>
+		<canvas id="Emission_Donut" class="chart"></canvas>
+	</div>
+</div>
 
+<div class="chart-container">
+	<div class="chart-wrapper">
+		<button id="toggleRatioScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+		<canvas id="Ratio_chart" class="chart"></canvas>
+	</div>
+</div>
 
-  
-  
-  <style>
+<style>
 	.chart-container {
-	  display: flex;
-	  justify-content: space-between;
-	  flex-wrap: wrap;
-	  margin-bottom: 20px;
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-bottom: 20px;
+	}
+
+	.chart-wrapper {
+		flex: 1 1 45%; /* Each chart-wrapper takes up 45% of the container's width */
+		max-width: 700px;
+		margin: 10px;
+		display: flex;
+		flex-direction: column; /* Stack button on top of chart */
+		align-items: center; /* Center align the button and chart */
 	}
 
 	.chart {
-	  flex: 1 1 45%; /* Each chart takes up 45% of the container's width */
-	  max-width: 700px; /* Maximum width for each chart */
-	  margin: 10px;
+		width: 100%; /* Ensure the chart takes full width of the wrapper */
 	}
 
 	@media (max-width: 1200px) {
-	.chart {
-	  flex: 1 1 100%; /* On smaller screens, each chart takes up full width */
-	}
+		.chart-wrapper {
+			flex: 1 1 100%; /* On smaller screens, each chart-wrapper takes up full width */
+		}
 	}
 
 	.toggle-button {
-	  display: block;
-	  margin: 10px auto;
-	  padding: 8px 16px;
-	  background-color: #4CAF50;
-	  color: white;
-	  border: none;
-	  cursor: pointer;
-	  font-size: 14px;
-	  border-radius: 4px;
+		margin-bottom: 10px;
+		padding: 8px 16px;
+		background-color: #4CAF50;
+		color: white;
+		border: none;
+		cursor: pointer;
+		font-size: 14px;
+		border-radius: 4px;
 	}
 
 	.toggle-button:hover {
-  	  background-color: #45a049;
+		background-color: #45a049;
 	}
-
-  </style>
-  
+</style>
