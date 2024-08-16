@@ -11,7 +11,7 @@
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>visit <a href="https://docs.berachain.com/learn/pol/gauges">docs.berachain.com</a> to learn More</p>
 	</footer>
 </div>
 
