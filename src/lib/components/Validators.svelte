@@ -16,17 +16,17 @@
 </script>
 
 <div class="validators">
-  <h3>Validators emmiting BGT</h3>
+  <h3>Validators emmiting BGT to this vault.</h3>
   <ul>
     {#each paginatedValidators as validator}
         {#if validator.logoURI}
-          <img src={validator.logoURI} alt={validator.name} width="50"/>
+          <img class="img" src={validator.logoURI} alt={validator.name} width="50"/>
         {/if}
     {/each}
   </ul>
 
   {#if validators.length > initialDisplayCount}
-    <button on:click={showAllValidators}>Expand to view all</button>
+    <button class="toggle-button" on:click={showAllValidators}>Expand to view all</button>
   {:else if validators.length == 0}
     <p>There are no validators currently emmiting to this pool.</p>
   {/if}
@@ -37,7 +37,7 @@
     <div class="modal-content">
       <span class="close" on:click={() => showModal = false}>&times;</span>
       <h2>All Validators</h2>
-      <button class="close-button" on:click={closeAllValidators}>&times;</button>
+      <button class="toggle-button" on:click={closeAllValidators}>&times;</button>
       <ul>
         {#each validators as validator}
           <li>
@@ -46,7 +46,7 @@
             <strong>Website:</strong> <a href={validator.website} target="_blank">{validator.website}</a> <br/>
             <strong>Twitter:</strong> <a href={validator.twitter} target="_blank">{validator.twitter}</a> <br/>
             {#if validator.logoURI}
-              <img src={validator.logoURI} alt={validator.name} width="50"/>
+              <img class="img" src={validator.logoURI} alt={validator.name} width="50"/>
             {/if}
           </li>
         {/each}
@@ -73,7 +73,7 @@
   }
 
   .modal-content {
-    background-color: white;
+    background-color: var(--color-bg-2);
     padding: 20px;
     border-radius: 10px;
     width: 80%;

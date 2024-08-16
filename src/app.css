@@ -159,12 +159,14 @@ button:focus:not(:focus-visible) {
     background: var(--color-bg-2);
     padding: 20px;
     border-radius: 8px;
-    max-width: 600px;
+    max-width: 95vw; /* Ensure modal width is constrained */
     max-height: 80vh; /* Set a max-height */
     overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling */
     width: 100%;
+    box-sizing: border-box; /* Include padding and border in width and height */
     position: relative;
-  }
+}
 
   .close-button {
     position: absolute;
@@ -189,7 +191,7 @@ button:focus:not(:focus-visible) {
 
 .chart-wrapper {
 	flex: 1 1 45%; /* Each chart-wrapper takes up 45% of the container's width */
-	max-width: 700px;
+	max-width: 95%;
 	margin: 10px;
 	display: flex;
 	flex-direction: column; /* Stack button on top of chart */
@@ -198,6 +200,7 @@ button:focus:not(:focus-visible) {
 
 .chart {
 	width: 100%; /* Ensure the chart takes full width of the wrapper */
+	height: 100%;
 }
 
 @media (max-width: 1200px) {
@@ -222,4 +225,29 @@ button:focus:not(:focus-visible) {
 	border-color: black;
 	color: #000;
 	box-shadow: 0 0 10px var(--color-theme-1);
+}
+
+
+
+.modal-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    overflow-x: auto; /* Allows horizontal scrolling if needed */
+}
+  
+  /* Adds padding and ensures that modal content does not extend beyond the screen width */
+  .modal {
+	padding: 15px;
+	max-width: 95vw;
+	overflow-x: auto; /* Allows horizontal scrolling if needed */
+  }
+  
+  /* Ensures that modal remains centered */
+  .modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
