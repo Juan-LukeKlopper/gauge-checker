@@ -6,7 +6,7 @@
 	let Incentive_chart
 	let Emission_Donut
 	let Incentive_Donut
-	let Ratio_Donut
+	let Ratio_chart
 
 	function generateColors(numColors) {
       const colors = [];
@@ -43,7 +43,8 @@
   const e_ctx = document.getElementById('Emmission_Chart').getContext('2d');
   const incentiveDonutCtx = document.getElementById('Incentive_Donut').getContext('2d');
   const emissionDonutCtx = document.getElementById('Emission_Donut').getContext('2d');
-  const ratioDonutCtx = document.getElementById('Ratio_Donut').getContext('2d');
+  const ratioBarCtx = document.getElementById('Ratio_chart').getContext('2d');
+
 
   const Incentive_data = {
     labels: chartData.map(vault => vault.name),
@@ -87,6 +88,8 @@
           text: 'Active Incentives in Honey.',
 		  font: {
             size: 20,
+			padding: 5,
+			lineHeight: 1.5,
 		  },
         }
       },
@@ -117,6 +120,7 @@
           text: 'Active BGT emmissions.',
 		  font: {
             size: 20,
+			lineHeight: 1.5,
 		  },
         }
 	  },
@@ -139,13 +143,14 @@
           labels: {
 			boxWidth: 15,
           },
-		  position: 'left',
+		  position: 'top',
         },
 		title: {
           display: true,
           text: 'Active Incentives in Honey.',
 		  font: {
             size: 20,
+			lineHeight: 1.5,
 		  },
         }
       }
@@ -162,13 +167,14 @@
           labels: {
 			boxWidth: 15,
           },
-		  position: 'left',
+		  position: 'top',
         },
 		title: {
           display: true,
           text: 'Active BGT emmissions.',
 		  font: {
             size: 20,
+			lineHeight: 1.5,
 		  },
         }
       }
@@ -176,43 +182,45 @@
   });
 
   const ratioData = chartData.map(vault => vault.activeIncentives / vault.bgtInflationCapture);
-  new Chart(ratioDonutCtx, {
-    type: 'doughnut',
-    data: {
-      labels: chartData.map(vault => vault.name),
-      datasets: [{
-        label: 'Incentive/Emission Ratio',
-        data: ratioData,
-        backgroundColor: backgroundColors,
-        borderColor: borderColors,
-        borderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-	  plugins: {
-        legend: {
-          labels: {
-			boxWidth: 15,
+    Ratio_chart = new Chart(ratioBarCtx, {
+      type: 'bar',
+      data: {
+        labels: chartData.map(vault => vault.name),
+        datasets: [{
+          label: 'Incentive/Emission Ratio',
+          data: ratioData,
+          backgroundColor: backgroundColors,
+          borderColor: borderColors,
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+          }
+        },
+        plugins: {
+          legend: {
+            display: false,
           },
-		  position: 'left',
-        },
-		title: {
-          display: true,
-          text: 'Incentive/Emmissions ratio.',
-		  font: {
-            size: 20,
-		  },
-        },
-		subtitle: {
-			display: true,
-			text: 'Higher is better',
-			font: {
-			  size: 14,
-			}
-		},
+		  title: {
+            display: true,
+            text: 'Incentive/Emissions Ratio.',
+            font: {
+              size: 20,
+            },
+          },
+          subtitle: {
+            display: true,
+            text: 'Higher is better',
+            font: {
+              size: 14,
+            }
+          },
+        }
       }
-    }
   });
 
   function toggleScale(chart, button) {
@@ -230,6 +238,10 @@
 
   document.getElementById('toggleEmmissionScale').addEventListener('click', () => {
     toggleScale(Emmissions_chart, document.getElementById('toggleEmmissionScale'));
+  });
+
+  document.getElementById('toggleRatioScale').addEventListener('click', () => {
+    toggleScale(Ratio_chart, document.getElementById('toggleRatioScale'));
   });
 });
 
@@ -252,7 +264,10 @@
   </div>
 
   <div class="chart-container">
-	<canvas id="Ratio_Donut" class="chart"></canvas>
+	<div>
+	  <button id="toggleRatioScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+	</div>
+	<canvas id="Ratio_chart" class="chart"></canvas>
   </div>
 
 
