@@ -26,10 +26,6 @@ function closeVaultDetails() {
 }
 </script>
 
-<style>
-
-</style>
-
 
 {#await promise}
 	<p>...waiting</p>
