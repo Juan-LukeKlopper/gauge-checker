@@ -76,8 +76,25 @@
       scales: {
         y: {
           type: 'linear',
-          beginAtZero: true
-        }
+          beginAtZero: true,
+		  grid: {
+			color: '#DDD',
+		  },
+		  ticks: {
+			color: '#fff'
+		  }
+        },
+		x: {
+		  grid: {
+			color: '#DDD',
+		  },
+		  border: {
+			color: '#FFF',
+		  },
+		  ticks: {
+			color: '#fff'
+		  }
+		}
       },
 	  plugins: {
         legend: {
@@ -86,6 +103,7 @@
 		title: {
           display: true,
           text: 'Active Incentives in Honey.',
+		  color: '#FFF',
 		  font: {
             size: 20,
 			padding: 5,
@@ -108,8 +126,25 @@
       responsive: true,
       scales: {
         y: {
-          beginAtZero: true
-        }
+          beginAtZero: true,
+		  grid: {
+			color: '#DDD',
+		  },
+		  ticks: {
+			color: '#fff'
+		  }
+        },
+		x: {
+		  grid: {
+			color: '#DDD',
+		  },
+		  border: {
+			color: '#FFF',
+		  },
+		  ticks: {
+			color: '#fff'
+		  }
+		}
       },
 	  plugins: {
         legend: {
@@ -118,6 +153,7 @@
 		title: {
           display: true,
           text: 'Active BGT emmissions.',
+		  color: '#FFF',
 		  font: {
             size: 20,
 			lineHeight: 1.5,
@@ -142,12 +178,14 @@
         legend: {
           labels: {
 			boxWidth: 15,
+			color: '#FFF',
           },
 		  position: 'top',
         },
 		title: {
           display: true,
           text: 'Active Incentives in Honey.',
+		  color: '#FFF',
 		  font: {
             size: 20,
 			lineHeight: 1.5,
@@ -166,12 +204,14 @@
         legend: {
           labels: {
 			boxWidth: 15,
+			color: '#FFF',
           },
 		  position: 'top',
         },
 		title: {
           display: true,
           text: 'Active BGT emmissions.',
+		  color: '#FFF',
 		  font: {
             size: 20,
 			lineHeight: 1.5,
@@ -199,7 +239,24 @@
         scales: {
           y: {
             beginAtZero: true,
-          }
+			grid: {
+			  color: '#DDD',
+		    },
+			ticks: {
+			  color: '#fff'
+		    }
+          },
+		  x: {
+		  grid: {
+			color: '#DDD',
+		  },
+		  border: {
+			color: '#FFF',
+		  },
+		  ticks: {
+			color: '#fff'
+		  }
+		}
         },
         plugins: {
           legend: {
@@ -208,6 +265,7 @@
 		  title: {
             display: true,
             text: 'Incentive/Emissions Ratio.',
+			color: '#FFF',
             font: {
               size: 20,
             },
@@ -215,6 +273,7 @@
           subtitle: {
             display: true,
             text: 'Higher is better',
+			color: '#FFF',
             font: {
               size: 14,
             }
@@ -269,6 +328,7 @@
   </script>
   
   <div class="chart-container">
+	<p>This section has a bar and a pie/doughnut chart to display the active incentives in Honey, this means this visually demonstrates how the incentives are shared across the vaults</p>
 	<div class="chart-wrapper">
 		<button id="toggleIncentiveScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
 		<canvas id="Incentive_Chart" class="chart"></canvas>
@@ -280,6 +340,7 @@
 </div>
 
 <div class="chart-container">
+	<p>This section has a bar and a pie/doughnut chart to display the way validators are emmitting their $BGT, this means this visually demonstrates how emmissions are shared across the vaults</p>
 	<div class="chart-wrapper">
 		<button id="toggleEmmissionScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
 		<canvas id="Emmission_Chart" class="chart"></canvas>
@@ -291,51 +352,9 @@
 </div>
 
 <div class="chart-container">
+	<p>This section has a bar chart to display the ratio of Incentives ÷ Emmissions, this means this visually demonstrates which vaults will return the highest amount of incentives per BGT emitted to it across the vaults</p>
 	<div class="chart-wrapper">
 		<button id="toggleRatioScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
 		<canvas id="Ratio_chart" class="chart"></canvas>
 	</div>
 </div>
-
-<style>
-	.chart-container {
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		margin-bottom: 20px;
-	}
-
-	.chart-wrapper {
-		flex: 1 1 45%; /* Each chart-wrapper takes up 45% of the container's width */
-		max-width: 700px;
-		margin: 10px;
-		display: flex;
-		flex-direction: column; /* Stack button on top of chart */
-		align-items: center; /* Center align the button and chart */
-	}
-
-	.chart {
-		width: 100%; /* Ensure the chart takes full width of the wrapper */
-	}
-
-	@media (max-width: 1200px) {
-		.chart-wrapper {
-			flex: 1 1 100%; /* On smaller screens, each chart-wrapper takes up full width */
-		}
-	}
-
-	.toggle-button {
-		margin-bottom: 10px;
-		padding: 8px 16px;
-		background-color: #4CAF50;
-		color: white;
-		border: none;
-		cursor: pointer;
-		font-size: 14px;
-		border-radius: 4px;
-	}
-
-	.toggle-button:hover {
-		background-color: #45a049;
-	}
-</style>
