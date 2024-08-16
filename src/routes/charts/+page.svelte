@@ -74,7 +74,7 @@
       responsive: true,
       scales: {
         y: {
-          type: 'logarithmic',
+          type: 'linear',
           beginAtZero: true
         }
       },
@@ -214,23 +214,47 @@
       }
     }
   });
+
+  function toggleScale(chart, button) {
+    const scaleType = chart.options.scales.y.type === 'linear' ? 'logarithmic' : 'linear';
+    chart.options.scales.y.type = scaleType;
+    chart.update();
+
+    button.textContent = `Switch chart to ${scaleType === 'linear' ? 'Logarithmic' : 'Linear'} Scale`;
+  }
+
+  // Event Listeners for Buttons
+  document.getElementById('toggleIncentiveScale').addEventListener('click', () => {
+    toggleScale(Incentive_chart, document.getElementById('toggleIncentiveScale'));
+  });
+
+  document.getElementById('toggleEmmissionScale').addEventListener('click', () => {
+    toggleScale(Emmissions_chart, document.getElementById('toggleEmmissionScale'));
+  });
 });
 
   </script>
   
   <div class="chart-container">
+	<div>
+  	  <button id="toggleIncentiveScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+	</div>
 	<canvas id="Incentive_Chart" class="chart"></canvas>
 	<canvas id="Incentive_Donut" class="chart"></canvas>
   </div>
-  
+
   <div class="chart-container">
+	<div>
+	  <button id="toggleEmmissionScale" class="toggle-button">Switch chart to Logarithmic Scale</button>
+	</div>
 	<canvas id="Emmission_Chart" class="chart"></canvas>
 	<canvas id="Emission_Donut" class="chart"></canvas>
   </div>
-  
+
   <div class="chart-container">
 	<canvas id="Ratio_Donut" class="chart"></canvas>
   </div>
+
 
   
   
@@ -253,5 +277,22 @@
 	  flex: 1 1 100%; /* On smaller screens, each chart takes up full width */
 	}
 	}
+
+	.toggle-button {
+	  display: block;
+	  margin: 10px auto;
+	  padding: 8px 16px;
+	  background-color: #4CAF50;
+	  color: white;
+	  border: none;
+	  cursor: pointer;
+	  font-size: 14px;
+	  border-radius: 4px;
+	}
+
+	.toggle-button:hover {
+  	  background-color: #45a049;
+	}
+
   </style>
   
