@@ -6,28 +6,43 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '20'
 
     - name: Install Dependencies
-      run: npm install
+      run: yarn install --frozen-lockfile
 
     - name: Build Project
-      run: npm run build
+      run: yarn build
 
-    - name: Set Adapter
-      run: echo "ADAPTER=static" >> $GITHUB_ENV
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+  
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ./build
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
     - name: Deploy to GitHub Pages
-      run: npm run deploy
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      id: deployment
+      uses: actions/deploy-pages@v1
