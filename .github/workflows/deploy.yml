@@ -24,6 +24,9 @@ jobs:
     - name: Build Project
       run: npm run build
 
+    - name: Set Adapter
+      run: echo "ADAPTER=static" >> $GITHUB_ENV
+
     - name: Deploy to GitHub Pages
       run: npm run deploy
       env:
