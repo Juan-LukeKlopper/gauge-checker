@@ -19,6 +19,9 @@ jobs:
       with:
         node-version: '20'
 
+    - name: Set Adapter
+      run: echo "ADAPTER=static" >> $GITHUB_ENV
+
     - name: Install Dependencies
       run: yarn install --frozen-lockfile
 
