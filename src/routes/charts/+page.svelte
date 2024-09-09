@@ -34,7 +34,7 @@
 		load();
 	});
 
-	async function load() {
+	export async function load() {
 		const chartData = await fetchData();
 		chartData.sort((a, b) => b.activeIncentives - a.activeIncentives);
 		console.log(chartData);
